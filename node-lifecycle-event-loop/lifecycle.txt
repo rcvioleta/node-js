@@ -1,0 +1,4 @@
+node app.js -> 
+    start script -> 
+        parse code, register variables and functions -> 
+        event loop -> keeps on running as long as there are event listeners registered 
