@@ -5,8 +5,13 @@ const rootDir = require('../utility/path');
 
 const router = express.Router();
 
+const adminData = require('./admin');
+
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+    // console.log(adminData.products);
+    // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+    const products = adminData.products;
+    res.render('shop', { products: products, pageTitle: 'Shop', page: 'shop' });
 });
 
 module.exports = router;
