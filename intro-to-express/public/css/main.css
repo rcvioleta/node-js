@@ -30,9 +30,10 @@ html {
 
 .nav-list__item a {
     text-decoration: none;
-    text-transform: uppercase;
     color: #fff;
     font-weight: bold;
+    font-family: "Segoe UI Light";
+    font-size: 10pt;
     height: 100%;
     display: block;
     padding: .8rem;
@@ -44,12 +45,12 @@ html {
 }
 
 .main-content {
-    /* text-align: center; */
+    text-align: center;
     margin-top: 5rem;
 }
 
 .form-wrapper {
-    margin-top: 4rem;
+    display: inline-block;
     padding: 1rem;
 }
 
@@ -71,6 +72,10 @@ html {
     margin: 1rem 0;
 }
 
+textarea {
+    font-family: inherit;
+}
+
 .btn {
     border: 1px solid #00b894;
     color: #eee;
@@ -78,6 +83,7 @@ html {
     font-family: sans-serif;
     cursor: pointer;
     border-radius: 3px;
+    text-decoration: none;
 }
 
 .btn__primary {
@@ -109,6 +115,7 @@ html {
     border-radius: 3px;
     border: 1px solid #dfe6e9;
     box-shadow: 0 0 15px #b2bec3;
+    overflow: hidden;
 }
 
 .card__header {

@@ -8,17 +8,19 @@
             <% for (let product of products) { %>
                 <article class="card product-item">
                     <header class="card__header">
-                        <h1><%= product.title %></h1>
+                        
                     </header>
                     <div class="card__image"> 
-                        <img src="http://www.lesliesikos.com/img/web-design-book.jpg" alt="book">
+                        <img src="<%= product.imageUrl %>" alt="book">
                     </div>    
                     <div class="card__content"> 
-                        <h1>$19.00</h1>
-                        <p>Python for Dummies by MIT KJ Lord</p>
+                        <h1>$<%= product.price %></h1>
+                        <h3><%= product.title %></h3>
+                        <p><%= product.description %></p>
                     </div>    
                     <div class="card__actions">
-                        <button class="btn btn__primary">Add to Cart</button>
+                        <%- include('../includes/add-to-cart.ejs', { product: product }) %>
+                        <a href="/product/<%= product.id %>" class="btn btn__primary">Details</a>
                     </div>    
                 </article>
             <% } %>
