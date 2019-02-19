@@ -4,6 +4,7 @@
     <%- include('../includes/navigation.ejs') %>
     <main class="main-content" style="text-align: left;">
         <form action="/admin/<%= editing ? 'update-product' : 'add-product' %>" method="POST">
+            <% if (editing) { %> <input type="hidden" name="productId" value="<%= product.id %>"> <% } %>
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" class="form-control" value="<%= editing ? product.title : '' %>">
