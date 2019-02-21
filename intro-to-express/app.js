@@ -58,7 +58,7 @@ sequelize
     // .sync({ force: true })
     .sync()
     .then(result => {
-        return User.findById(1);
+        return User.findByPk(1);
     })
     .then(user => {
         if (!user) return User.create({
