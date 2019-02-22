@@ -1,5 +1,4 @@
 const Products = require('../models/product');
-const Cart = require('../models/cart');
 
 const fetchAllProducts = (fileToRender, res, pageTitle, page) => {
     Products.findAll()
@@ -88,6 +87,52 @@ exports.postCart = (req, res, next) => {
 
 exports.getIndex = (req, res, next) => {
     fetchAllProducts('shop/index', res, 'Shop', 'shop');
+}
+
+exports.getOrders = (req, res, next) => {
+    req.user
+        .getOrders({
+            include: ['products']
+        })
+        .then(orders => {
+            res.render('shop/order', {
+                orders: orders,
+                pageTitle: 'Orders',
+                page: 'orders'
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+exports.postCreateOrder = (req, res, next) => {
+    let fetchedCart;
+    req.user
+        .getCart()
+        .then(cart => {
+            fetchedCart = cart;
+            return cart.getProducts();
+        })
+        .then(products => {
+            return req.user
+                .createOrder()
+                .then(order => {
+                    return order.addProducts(products.map(product => {
+                        product.orderItem = {
+                            quantity: product.cartItem.qty
+                        }
+                        return product;
+                    }));
+                })
+                .catch(err => console.log(err));
+        })
+        .then(result => {
+            return fetchedCart.setProducts(null);
+        })
+        .then(() => {
+            console.log('Successfully created orders...');
+            res.redirect('/orders');
+        })
+        .catch(err => console.log(err));
 }
 
 exports.getCheckout = (req, res, next) => {
